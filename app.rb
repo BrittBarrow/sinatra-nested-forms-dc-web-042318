@@ -3,7 +3,18 @@ require './environment'
 module FormsLab
   class App < Sinatra::Base
 
-    # code other routes/actions here
+
+    get '/pirates' do
+      erb :"pirates/new"
+    end
+
+    post '/pirates' do
+      josh = Pirate.new(params[:pirate])
+      
+      puts " gfdg"
+      erb :"pirates/show"
+
+    end
 
   end
 end
