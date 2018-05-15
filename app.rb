@@ -3,15 +3,24 @@ require './environment'
 module FormsLab
   class App < Sinatra::Base
 
+    get '/' do
+      "Welcome to the Nested Forms Lab! let's navigate to the '/new'"
+    end
 
-    get '/pirates' do
+
+    get '/new' do
       erb :"pirates/new"
     end
 
     post '/pirates' do
-      josh = Pirate.new(params[:pirate])
-      
-      puts " gfdg"
+      @pirate = Pirate.new(params[:pirate])
+
+      params[:pirate][:ships].each do |ship_args|
+        Ship.new(ship_args)
+      end
+
+      @ships = Ship.all
+
       erb :"pirates/show"
 
     end
